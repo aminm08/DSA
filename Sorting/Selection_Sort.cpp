@@ -13,7 +13,7 @@ void swap(int arr[], int index1, int index2) {
 }
 
 
-void Selection_Sort(int arr[], int n) {
+void selectionSort(int arr[], int n) {
 
     /**
      * @brief Sorts an array using the selection sort algorithm.
@@ -60,7 +60,7 @@ int main(){
 
     printArray(arr, n);
 
-    Selection_Sort(arr, n);
+    selectionSort(arr, n);
 
     printArray(arr, n);
 

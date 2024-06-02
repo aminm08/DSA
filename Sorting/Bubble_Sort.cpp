@@ -12,7 +12,7 @@ void swap(int arr[], int index1, int index2) {
 
 }
 
-void BubbleSort(int arr[], int n) {
+void bubbleSort(int arr[], int n) {
 
     /**
      * @brief Sorts an array of integers using the Bubble Sort algorithm.
@@ -59,7 +59,7 @@ int main(){
 
     printArray(arr, n);
 
-    BubbleSort(arr, n);
+    bubbleSort(arr, n);
 
     printArray(arr, n);
 
