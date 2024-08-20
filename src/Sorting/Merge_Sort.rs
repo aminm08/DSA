@@ -1,9 +1,53 @@
 
 
-fn merge(arr: &mut [i32], s: u32, m: u32, e: u32) {
+fn merge(arr: &mut [i32], s: usize, m: usize, e: usize) {
 
     println!("Merging s: {}, e: {}, m: {}", s, e, m);
     
+
+    let mut i = s;
+    let mut j = m + 1;
+    let mut newarr : Vec<i32> = Vec::new();
+    while i <= m && j <= e {
+        println!("i = {}, j = {}", i, j);
+        if arr[i] > arr[j] {
+            
+            newarr.push(arr[j]);
+            j += 1;
+        } else if arr[i] < arr[j] {
+
+            newarr.push(arr[i]);
+            i += 1;
+        }
+
+    }
+
+    if i <= m {
+
+        while i <= m {
+
+            newarr.push(arr[i]);
+            i += 1;
+        }
+
+    } else if j <= e {
+
+
+        while j <= e {
+            
+            newarr.push(arr[j]);
+            j += 1;
+        }
+
+    }
+
+
+    println!("{:?}", newarr);
+
+    
+
+
+
     // i = start
     // j = m +1
     // compare until member exists: i < m and j < e
@@ -16,7 +60,7 @@ fn merge(arr: &mut [i32], s: u32, m: u32, e: u32) {
 
 
 
-fn merge_sort(arr: &mut [i32], s: u32, e: u32) {
+fn merge_sort(arr: &mut [i32], s: usize, e: usize) {
 
     if s == e {
         return 
@@ -24,7 +68,7 @@ fn merge_sort(arr: &mut [i32], s: u32, e: u32) {
     }
 
     
-    let m: u32 = (s + e) / 2;
+    let m: usize = (s + e) / 2;
 
     merge_sort(arr, s, m);
     merge_sort(arr, m+1, e);
@@ -42,10 +86,10 @@ fn merge_sort(arr: &mut [i32], s: u32, e: u32) {
 fn main() {
 
 
-    let mut arr: [i32; 9] = [4, 6, 8, 2, 1, 9, 10, -2, -5];
+    let mut arr: [i32; 3] = [8, 6, 4];
 
 
-    merge_sort(&mut arr, 0, 8);
+    merge_sort(&mut arr, 0, 2);
 
     println!("{:?}", arr);
 
