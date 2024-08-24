@@ -2,59 +2,58 @@
 
 fn merge(arr: &mut [i32], s: usize, m: usize, e: usize) {
 
-    println!("Merging s: {}, e: {}, m: {}", s, e, m);
+
+
+    let mut i = 0usize;
+    let mut j = 0usize;
+    let mut k = 0usize;
+
+    let n1 = m - s + 1;
+    let n2 = e - m;
+    let mut left = vec![0; n1];
+    let mut right = vec![0; n2];
     
+    left[..].clone_from_slice(&arr[..n1]);
+    println!("{:?}", left);
+    if n2 + n1 == arr.len() {
 
-    let mut i = s;
-    let mut j = m + 1;
-    let mut newarr : Vec<i32> = Vec::new();
-    while i <= m && j <= e {
-        println!("i = {}, j = {}", i, j);
-        if arr[i] > arr[j] {
-            
-            newarr.push(arr[j]);
-            j += 1;
-        } else if arr[i] < arr[j] {
-
-            newarr.push(arr[i]);
-            i += 1;
-        }
-
+        right[..].clone_from_slice(&arr[n1..]);
+    } else {
+        right[..].clone_from_slice(&arr[n1..(n2+1)]);
     }
+    println!("{:?}", right);
+    while i < n1 && j < n2 {
 
-    if i <= m {
+        if left[i] < right[j] {
 
-        while i <= m {
-
-            newarr.push(arr[i]);
+            arr[k] = left[i];    
             i += 1;
-        }
+        } else {
 
-    } else if j <= e {
-
-
-        while j <= e {
-            
-            newarr.push(arr[j]);
+            arr[k] = right[j]; 
             j += 1;
         }
+
+        k += 1;
 
     }
 
 
-    println!("{:?}", newarr);
+    while i < n1 {
+
+        arr[k] = left[i];
+        k += 1;
+        i += 1;
+    }
+
+    while j < n2 {
+
+        arr[k] = right[j];
+        k += 1;
+        j += 1;
+    }
 
     
-
-
-
-    // i = start
-    // j = m +1
-    // compare until member exists: i < m and j < e
-    // put the smaller element in the array 
-    // add one to the index of the smaller element(i or j)
-    // put the rest of the existing array if there is anything left . for
-    // situations like {2,3,4} and {1} which i runs out and 2, 3, 4 should be merged after that
 
 }
 
@@ -86,10 +85,10 @@ fn merge_sort(arr: &mut [i32], s: usize, e: usize) {
 fn main() {
 
 
-    let mut arr: [i32; 3] = [8, 6, 4];
+    let mut arr: [i32; 9] = [5, 8,1, 0, 9, -10, 7, 4, -3];
 
 
-    merge_sort(&mut arr, 0, 2);
+    merge_sort(&mut arr, 0, 9);
 
     println!("{:?}", arr);
 
