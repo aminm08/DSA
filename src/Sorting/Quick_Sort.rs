@@ -1,32 +1,55 @@
 use std::fmt::Debug;
+use std::cmp::PartialOrd;
+fn partition<T: Debug + PartialOrd + Copy>(arr: &mut [T]) -> usize {
 
-fn partition<T: Debug>(arr: &[T]) {
+    let mut l = 0;
+    let mut h = arr.len() - 1;
 
-    println!("{:?}", arr);
+    let pivot = arr[l];
 
-}
+    loop {
+
+        while arr[l] < pivot {
+            l += 1;
+        }
 
 
+        while arr[h] > pivot {
+            
+            h -= 1;
+        }
 
-fn quick_sort<T: Debug>(arr: &[T]) {
-    println!("{:?}", arr);
-    if arr.len() > 1 {
-        let pivot = arr.len() / 2;
-        quick_sort(&arr[..pivot]);
-        quick_sort(&arr[pivot..]);
+        if l >= h {
+            return h;
+        }
 
+        arr.swap(h, l);
+        println!("{:?}", arr);
     }
-
 }
+
+
+
+//fn quick_sort<T: Debug + PartialOrd + Copy>(arr: &[T]) {
+ //   if arr.len() > 1 {
+   //     let pivot = partition(arr);
+     //   quick_sort(arr[..pivot]);
+       // quick_sort(arr[pivot..]);
+
+    //}
+
+//}
 
 
 
 fn main() {
 
-    let arr = [5, 4, 1, 8, 2, 7, 3, 9];
+    let mut arr = [6, 2, 1, 3];
 
-    quick_sort(&arr);
+    let j = partition(&mut arr);
+    
 
+    println!("{:?}, {}", arr, j);
 
 
 }
